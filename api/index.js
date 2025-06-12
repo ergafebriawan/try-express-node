@@ -1,6 +1,5 @@
 // app.js
 const express = require('express');
-const serverless = require('serverless-http');
 
 const app = express();
 
@@ -26,9 +25,6 @@ app.post('/data', (req, res) => {
     receivedData: { name, value }
   });
 });
-
-// Export handler untuk serverless
-module.exports.handler = serverless(app);
 
 // Hanya untuk pengembangan lokal (opsional)
 if (require.main === module) {
