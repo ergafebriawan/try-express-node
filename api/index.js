@@ -1,23 +1,20 @@
-// api/index.js
 const express = require('express');
 const app = express();
 
-// Middleware untuk parsing JSON body
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.status(200).send('Hello this is root');
-});
-
-// Route sederhana
-app.get('/api', (req, res) => {
-  res.status(200).send('Hello from Vercel Express Serverless API!');
+  res.status(200).json({
+    message: 'Hello this is trying serverless with express js'
+  });
 });
 
 // Contoh route dengan parameter
 app.get('/api/greet/:name', (req, res) => {
   const name = req.params.name;
-  res.status(200).send(`Hello, ${name}! Welcome to the serverless world.`);
+  res.status(200).json({
+    message: `Hello, ${name}! Welcome to the serverless world.`
+  });
 });
 
 // Contoh route POST
