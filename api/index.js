@@ -1,35 +1,26 @@
-// app.js
+// api/index.js
 const express = require('express');
-
 const app = express();
 
-// Middleware untuk parsing body JSON
+// Middleware untuk parsing JSON body
 app.use(express.json());
 
-// Contoh endpoint GET
-app.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'Halo dari aplikasi Express serverless!',
-    timestamp: new Date().toISOString()
-  });
+// Route sederhana
+app.get('/api', (req, res) => {
+  res.status(200).send('Hello from Vercel Express Serverless API!');
 });
 
-// Contoh endpoint POST
-app.post('/data', (req, res) => {
-  const { name, value } = req.body;
-  if (!name || !value) {
-    return res.status(400).json({ message: 'Nama dan nilai diperlukan.' });
-  }
-  res.status(201).json({
-    message: 'Data diterima!',
-    receivedData: { name, value }
-  });
+// Contoh route dengan parameter
+app.get('/api/greet/:name', (req, res) => {
+  const name = req.params.name;
+  res.status(200).send(`Hello, ${name}! Welcome to the serverless world.`);
 });
 
-// Hanya untuk pengembangan lokal (opsional)
-if (require.main === module) {
-  const port = process.env.PORT || 3000;
-  app.listen(port, () => {
-    console.log(`Server Express berjalan di http://localhost:${port}`);
-  });
-}
+// Contoh route POST
+app.post('/api/echo', (req, res) => {
+  const body = req.body;
+  res.status(200).json({ received: body });
+});
+
+// Ekspor aplikasi Express
+module.exports = app;
