@@ -5,6 +5,10 @@ const app = express();
 // Middleware untuk parsing JSON body
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.status(200).send('Hello this is root');
+});
+
 // Route sederhana
 app.get('/api', (req, res) => {
   res.status(200).send('Hello from Vercel Express Serverless API!');
